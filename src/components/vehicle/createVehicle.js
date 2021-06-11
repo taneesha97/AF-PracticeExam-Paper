@@ -26,15 +26,17 @@ class CreateVehicle extends Component{
         axios.get('http://localhost:8080/category/')
             .then(response => {
                 this.setState({ categories: response.data.data }, () => {
-                    let data = [];
-                    this.state.categories.map((item, index) => {
-                        let category = {
-                            value: item._id,
-                            label: item.name
-                        }
-                        data.push(category)
-                    });
-                    this.setState({ options: data });
+                    if(this.state.categories.length > 0) {
+                        let data = [];
+                        this.state.categories.map((item, index) => {
+                            let category = {
+                                value: item._id,
+                                label: item.name
+                            }
+                            data.push(category)
+                        });
+                        this.setState({options: data});
+                    }
                 })
             })
         }
